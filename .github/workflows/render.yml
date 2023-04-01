@@ -18,8 +18,7 @@ jobs:
           context: .
           push: true
           tags: fduartej1/appfunko:latest
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          access-token: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
   deploy-to-render:
     needs: build-and-publish
