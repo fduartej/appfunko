@@ -17,7 +17,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: fduartej1/appfunko1:latest
+          tags: fduartej1/appfunko:latest
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
