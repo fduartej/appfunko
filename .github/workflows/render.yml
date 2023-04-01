@@ -17,7 +17,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: fduartej1/appfunko:latest
+          tags: fduartej1/appfunko
           access-token: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
   deploy-to-render:
