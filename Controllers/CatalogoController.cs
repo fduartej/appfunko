@@ -5,8 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using appfunko.Models;
 using appfunko.Data;
+using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
+
+
 
 namespace appfunko.Controllers
 {
@@ -16,14 +21,21 @@ namespace appfunko.Controllers
         private readonly ILogger<CatalogoController> _logger;
         private readonly ApplicationDbContext _dbcontext;
 
-        public CatalogoController(ILogger<CatalogoController> logger,ApplicationDbContext context)
+        private readonly IDistributedCache _cache;
+
+        public CatalogoController(ILogger<CatalogoController> logger,
+                ApplicationDbContext context,
+                IDistributedCache cache)
         {
             _logger = logger;
             _dbcontext = context;
+            _cache = cache;
         }
 
-        public IActionResult Index(string? searchString)
+
+        public async Task<IActionResult> Index(string? searchString)
         {
+            
             var productos = from o in _dbcontext.DataProductos select o;
             //SELECT * FROM t_productos -> &
             if(!String.IsNullOrEmpty(searchString)){
@@ -31,8 +43,8 @@ namespace appfunko.Controllers
                 // & + WHERE name like '%ABC%'
             }
             productos = productos.Where(s => s.Status.Contains("Activo"));
-            Response.Headers["Cache-Control"] = "max-age=3600, public";
-            return View(productos.ToList());
+            
+            return View(await productos.ToListAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
