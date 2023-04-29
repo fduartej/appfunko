@@ -11,3 +11,7 @@ dotnet ef migrations add InitialMigration --context appfunko.Data.ApplicationDbC
 dotnet tool update --global dotnet-ef --version 7.0.3
 
 dotnet ef database update
+
+## Generacion del Codigo Login y Registrar Cuenta de Identity para modificarlo
+
+dotnet aspnet-codegenerator identity -dc appfunko.Data.ApplicationDbContext --files "Account.Register;Account.Login"

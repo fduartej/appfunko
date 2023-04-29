@@ -1,0 +1,50 @@
+@model dynamic;
+@using System.Collections.Generic;
+
+@{
+    ViewData["Title"] = "Carrito";
+    IEnumerable<appfunko.Models.Proforma> listItemsCarrito = new List<Proforma>();
+    listItemsCarrito = @Model.elementosCarrito;
+    Decimal montoTotal = @Model.montoTotal;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a class="btn btn-primary" asp-controller="Pago" 
+        asp-action="Create" asp-route-monto="@montoTotal">Pagar</a><p>Total S/. @montoTotal</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => listItemsCarrito.FirstOrDefault().Producto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => listItemsCarrito.FirstOrDefault().Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => listItemsCarrito.FirstOrDefault().Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (Proforma item in Model.elementosCarrito) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
