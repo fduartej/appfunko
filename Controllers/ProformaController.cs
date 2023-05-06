@@ -58,6 +58,68 @@ namespace appfunko.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemproforma = await _dbcontext.DataProformas.FindAsync(id);
+            if (itemproforma == null)
+            {
+                return NotFound();
+            }
+            return View(itemproforma);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Cantidad,Precio,UserID")] Proforma proforma)
+        {
+            if (id != proforma.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _dbcontext.Update(proforma);
+                    await _dbcontext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_dbcontext.DataProformas.Any(e => e.Id == id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(proforma);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var proforma = await _dbcontext.DataProformas.FindAsync(id);
+            _dbcontext.DataProformas.Remove(proforma);
+            await _dbcontext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }        
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

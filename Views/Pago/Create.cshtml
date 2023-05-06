@@ -1,0 +1,63 @@
+@model appfunko.Models.Pago
+@{
+    ViewData["Title"] = "Pago";
+}
+<h1>@ViewData["Title"]</h1>
+
+    <div class="container">
+
+        <div class="row">
+          <div class="col-sm-10 mt-5">
+           <form asp-controller="Pago" asp-action="Pagar">
+              <div class="form-group row">
+                <input type="hidden" asp-for="UserID"/>
+                <div class="col-sm-2">
+                  <label asp-for="NombreTarjeta" class="control-label"></label>
+                </div>
+                <div class="col-sm-2">
+                  <input asp-for="NombreTarjeta" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">
+                  <label asp-for="NumeroTarjeta" class="control-label"></label>
+                </div>
+                <div class="col-sm-2">
+                  <input asp-for="NumeroTarjeta" class="form-control" data-inputmask="'mask': '9999-9999-9999-9999'" />
+                </div>
+              </div>              
+              <div class="form-group row">
+                <div class="col-sm-2">
+                  <label asp-for="DueDateYYMM" class="control-label"></label>
+                </div>
+                <div class="col-sm-2">
+                  <input asp-for="DueDateYYMM" class="form-control" data-inputmask="'mask': '99/99', 'placeholder': 'yy/mm'" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">
+                  <label asp-for="Cvv" class="control-label"></label>
+                </div>
+                <div class="col-sm-2">
+                  <input asp-for="Cvv" class="form-control" data-inputmask="'mask': '999', 'placeholder': '999'" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">
+                  <label asp-for="MontoTotal" class="control-label"></label>
+                </div>
+                <div class="col-sm-2">
+                  <input asp-for="MontoTotal" class="form-control" data-thousands="," data-decimal="." />
+                </div>
+              </div>  
+              <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">
+                  <button type="submit" class="btn btn-primary">Pagar</button> 
+                </div>
+              </div>
+            </form>
+            <h1>@ViewData["Message"]</h1>
+          </div>
+        </div>
+    </div>
