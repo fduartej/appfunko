@@ -23,18 +23,26 @@ namespace appfunko.Controllers
         private readonly ApplicationDbContext _dbcontext;
         private readonly UserManager<IdentityUser> _userManager;
 
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        
+
 
         private readonly IDistributedCache _cache;
 
         public CatalogoController(ILogger<CatalogoController> logger,
                 ApplicationDbContext context,
                 IDistributedCache cache,
-                UserManager<IdentityUser> userManager)
+                UserManager<IdentityUser> userManager,
+                SignInManager<IdentityUser> signInManager
+               
+                )
         {
             _logger = logger;
             _dbcontext = context;
             _cache = cache;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -62,6 +70,15 @@ namespace appfunko.Controllers
 
         public async Task<IActionResult> Add(int? id){
             var userID = _userManager.GetUserName(User); //sesion
+            /*
+
+            IdentityUser myidentity  = await Task.Run(() => _userManager.GetUserAsync(User));
+            var roles = await Task.Run(() => _userManager.GetRolesAsync(myidentity));
+
+            if(roles.Contains("admin") ){
+
+            }   
+            */
             if(userID == null){
                 ViewData["Message"] = "Por favor debe loguearse antes de agregar un producto";
                 List<Producto> productos = new List<Producto>();

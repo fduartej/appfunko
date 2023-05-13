@@ -1,0 +1,28 @@
+
+
+GET http://localhost:5120/api/producto HTTP/1.1
+Accept: application/json
+
+
+GET http://localhost:5120/api/producto/1 HTTP/1.1
+Accept: application/json
+
+
+
+GET http://localhost:5120/api/producto/2 HTTP/1.1
+Accept: application/json
+
+
+
+POST http://localhost:5120/api/producto HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Otro Producto4",
+  "descripcion": "Este libro otro producto3",
+  "precio": 2,
+  "porcentajeDescuento": 0,
+  "imageName": "https://drive.google.com/uc?export=view&id=1rE3ccQdUuUyEpqF5kZiQxt4D-VXYLyJ7",
+  "status": "Activo"
+}

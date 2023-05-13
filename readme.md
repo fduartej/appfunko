@@ -15,3 +15,7 @@ dotnet ef database update
 ## Generacion del Codigo Login y Registrar Cuenta de Identity para modificarlo
 
 dotnet aspnet-codegenerator identity -dc appfunko.Data.ApplicationDbContext --files "Account.Register;Account.Login"
+
+## Generacion de CRUD
+
+dotnet aspnet-codegenerator controller -name ProductoController -m Producto -dc appfunko.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
