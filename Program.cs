@@ -4,6 +4,7 @@ using appfunko.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using StackExchange.Redis;
 using appfunko.Service;
+using appfunko.Integration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddControllersWithViews();
 
 //Registro mi logica customizada y reuzable
 builder.Services.AddScoped<ProductoService, ProductoService>();
+builder.Services.AddScoped<CurrencyExchangeApiIntegration, CurrencyExchangeApiIntegration>();
+
 
 builder.Services.AddStackExchangeRedisCache(options =>
     {

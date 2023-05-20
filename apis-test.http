@@ -26,3 +26,55 @@ Accept: application/json
   "imageName": "https://drive.google.com/uc?export=view&id=1rE3ccQdUuUyEpqF5kZiQxt4D-VXYLyJ7",
   "status": "Activo"
 }
+
+// EXTERNAS
+
+GET https://weatherapi-com.p.rapidapi.com/current.json?q=-12.0464%2C-77.0428 HTTP/1.1
+Accept: application/json
+X-RapidAPI-Key: 0480f8b7a5mshe85c70b898a64c9p12b6eajsn98b3968305bb
+//X-RapidAPI-Host: weatherapi-com.p.rapidapi.com
+
+GET https://weatherapi-com.p.rapidapi.com/forecast.json?q=Lima&days=3 HTTP/1.1
+Accept: application/json
+X-RapidAPI-Key: 0480f8b7a5mshe85c70b898a64c9p12b6eajsn98b3968305bb
+
+
+GET https://weatherapi-com.p.rapidapi.com/sports.json?q=Lima HTTP/1.1
+Accept: application/json
+X-RapidAPI-Key: 0480f8b7a5mshe85c70b898a64c9p12b6eajsn98b3968305bb
+
+
+POST https://rapidprod-sendgrid-v1.p.rapidapi.com/mail/send HTTP/1.1
+Accept: application/json
+X-RapidAPI-Key: 0480f8b7a5mshe85c70b898a64c9p12b6eajsn98b3968305bb
+Content-Type: application/json
+
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "email": "fduartej@usmp.pe"
+                }
+            ],
+            "subject": "Hello, World2!"
+        }
+    ],
+    "from": {
+        "email": "from_address@example.com"
+    },
+    "content": [
+        {
+            "type": "text/plain",
+            "value": "Hello, World!"
+        }
+    ]
+}
+
+GET https://currency-exchange.p.rapidapi.com/exchange?from=USD&to=PEN&q=1.0 HTTP/1.1
+Accept: application/json
+X-RapidAPI-Key: 0480f8b7a5mshe85c70b898a64c9p12b6eajsn98b3968305bb
+
+GET https://currency-exchange.p.rapidapi.com/exchange?from=PEN&to=USD&q=1.0 HTTP/1.1
+Accept: application/json
+X-RapidAPI-Key: 0480f8b7a5mshe85c70b898a64c9p12b6eajsn98b3968305bb
