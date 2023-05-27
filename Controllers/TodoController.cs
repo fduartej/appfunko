@@ -33,6 +33,8 @@ namespace appfunko.Controllers
 
             List<TodoDTO> filtro = todos
             .Where(todo => todo.title.Contains("provident") && todo.id > 121)
+            .OrderBy(todo => todo.title)
+            .ThenByDescending(todo => todo.completed)
             .ToList();
 
             return View(filtro);
