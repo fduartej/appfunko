@@ -5,6 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using StackExchange.Redis;
 using appfunko.Service;
 using appfunko.Integration;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,15 @@ builder.Services.AddStackExchangeRedisCache(options =>
         options.Configuration = configuration["ConnectionString"];
     });
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "API",
+        Version = "v1",
+        Description = "Descripción de la API"
+    });
+});
 
 
 var app = builder.Build();
@@ -45,6 +55,14 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+});
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -10,6 +10,7 @@ namespace appfunko.Controllers.Rest
 {
     [ApiController]
     [Route("api/producto")]
+    [ApiVersion("1.0")]
     public class ProductoApiController : ControllerBase
     {
         private readonly ProductoService _productoService;
@@ -20,6 +21,8 @@ namespace appfunko.Controllers.Rest
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<List<Producto>>> List()
         {
             var productos = await _productoService.GetAll();
