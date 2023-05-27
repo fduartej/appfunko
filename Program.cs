@@ -22,7 +22,7 @@ builder.Services.AddControllersWithViews();
 //Registro mi logica customizada y reuzable
 builder.Services.AddScoped<ProductoService, ProductoService>();
 builder.Services.AddScoped<CurrencyExchangeApiIntegration, CurrencyExchangeApiIntegration>();
-
+builder.Services.AddScoped<JsonplaceholderAPIIntegration, JsonplaceholderAPIIntegration>();
 
 builder.Services.AddStackExchangeRedisCache(options =>
     {
